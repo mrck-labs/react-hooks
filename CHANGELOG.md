@@ -1,3 +1,10 @@
+# 1.0.0-beta.1 (2023-08-03)
+
+
+### Bug Fixes
+
+* release ([996de76](https://github.com/mrck-labs/react-hooks/commit/996de76eb1a07b2a0515f89e3ac38d586026b90f))
+
 # 1.0.0 (2023-06-23)
 
 
