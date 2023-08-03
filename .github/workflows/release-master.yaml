@@ -1,0 +1,57 @@
+name: Release Stable
+on:
+    push:
+        branches:
+            - master
+jobs:
+    release:
+        name: Release
+        runs-on: ubuntu-latest
+
+        env:
+            NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+        strategy:
+            matrix:
+                node-version: [18.x]
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install dependencies
+              run: yarn
+
+            - name: Build
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NODE_OPTIONS: '--max_old_space_size=8192'
+              run: |
+                  yarn build
+
+            - name: Retry Release
+              env:
+                  NO_HUSKY: 1
+                  NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NODE_OPTIONS: '--max_old_space_size=8192'
+              uses: nick-fields/retry@v2
+
+              with:
+                  command: |
+                      npx semantic-release
+                  max_attempts: 3
+                  retry_wait_seconds: 300
+                  timeout_minutes: 10

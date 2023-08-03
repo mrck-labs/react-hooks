@@ -1,0 +1,91 @@
+{
+    "name": "@mrck-labs/rc-template",
+    "version": "1.0.0",
+    "author": "marckraw <marckraw@icloud.com>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mrck-labs/mrck-rc-template.git"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
+    },
+    "engines": {
+        "node": ">=18.16.0"
+    },
+    "type": "module",
+    "main": "dist/index.cjs",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist",
+        "README.md"
+    ],
+    "scripts": {
+        "build:dec": "cd src && tsc --declaration --emitDeclarationOnly -p ../tsconfig.json && cd .. && resolve-tspaths",
+        "build:clean:all": "rimraf ./dist",
+        "build:rollup": "rollup -c",
+        "build": "yarn build:clean:all && yarn build:dec && yarn build:rollup",
+        "prettier": "prettier --write",
+        "prettier:all": "prettier --write .",
+        "prepare": "husky install",
+        "lint-staged": "lint-staged",
+        "semantic-release": "semantic-release"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.4",
+        "@babel/preset-env": "^7.21.4",
+        "@babel/preset-react": "^7.18.6",
+        "@babel/preset-typescript": "^7.21.4",
+        "@commitlint/config-conventional": "^17.6.1",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-commonjs": "^24.1.0",
+        "@rollup/plugin-json": "^6.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.2",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@swc/core": "1.3.41",
+        "@swc/helpers": "0.4.14",
+        "@types/node": "^18.15.11",
+        "@types/react": "^18.0.37",
+        "@types/react-dom": "^18.0.11",
+        "@types/sass": "^1.45.0",
+        "@typescript-eslint/eslint-plugin": "^5.59.0",
+        "@typescript-eslint/parser": "^5.59.0",
+        "commitizen": "^4.3.0",
+        "dotenv": "^16.0.3",
+        "eslint": "^8.38.0",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-react": "^7.32.2",
+        "glob": "^10.3.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.1",
+        "minimatch": "^9.0.1",
+        "npmlog": "^7.0.1",
+        "postcss": "^8.4.22",
+        "postcss-loader": "^7.2.4",
+        "postcss-sass-loader": "^1.1.0",
+        "prettier": "^2.8.7",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "resolve-tspaths": "^0.8.13",
+        "rimraf": "^5.0.1",
+        "rollup": "^3.20.6",
+        "rollup-plugin-filesize": "^10.0.0",
+        "rollup-plugin-peer-deps-external": "^2.2.4",
+        "rollup-plugin-postcss": "^4.0.2",
+        "rollup-plugin-preserve-directives": "^0.2.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-ts": "^3.2.0",
+        "semantic-release": "^21.0.5",
+        "semantic-release-slack-bot": "^4.0.1",
+        "typescript": "^5.1.3"
+    },
+    "exports": {
+        "./TestComponent": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.cjs"
+        }
+    }
+}

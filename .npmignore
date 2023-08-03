@@ -1,0 +1,15 @@
+# Husky
+.husky
+.lintstagedrc.js
+
+# Others
+.idea
+.vscode
+.gitignore
+.nvmrc
+rollup.config.js
+yarn.lock
+tsconfig.json
+
+
+

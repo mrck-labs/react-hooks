@@ -1,0 +1,12 @@
+node_modules
+
+
+# misc
+.DS_Store
+.idea
+.vs_code
+dist
+lib
+
+.env
+.env.local
