@@ -1,5 +1,4 @@
-mrck-labs React Component Templates
-
+List of usefull hooks for React
 
 # Troubleshooting
 
